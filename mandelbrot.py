@@ -18,3 +18,21 @@ def get_complex_grid(top_left: complex, bottom_right: complex, step: float) -> n
     # imags = np.flip(imags)
     imags = (imags.reshape((len(imags), 1)))
     return reals + (imags * 1j)
+
+def get_escape_time_color_arr(c_arr: np.ndarray, max_iterations: int) -> np.ndarray:
+    color_arr = c_arr.copy()
+    for ind,value in enumerate(c_arr):
+        for ind_col, col in enumerate(value):
+
+            if get_escape_time(col, max_iterations) is None:
+                color_arr[ind][ind_col] = 0
+
+            elif get_escape_time(col, max_iterations) == 0:
+                color_arr[ind][ind_col] = 1
+
+            else:
+                color = (max_iterations - (get_escape_time(col, max_iterations) + 1)) / (max_iterations + 1)
+                color_arr[ind][ind_col] = color
+
+
+    return color_arr
