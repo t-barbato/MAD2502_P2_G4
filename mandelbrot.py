@@ -1,14 +1,15 @@
 import numpy as np
 
 def get_escape_time(c: np.array(complex), max_iterations: int) -> int | None:
-    z = c
-    if abs(z) > 2:
+    z = np.array(c)
+    if np.abs(z) > 2:
         return 0
     for i in range(max_iterations):
         z = z**2 + c
-        if abs(z) > 2:
+        if np.abs(z) > 2:
             return i + 1
     return None
+
 
 def get_complex_grid(top_left: complex, bottom_right: complex, step: float) -> np.ndarray:
     reals = np.arange(top_left.real, bottom_right.real, step)
@@ -87,3 +88,4 @@ def get_escape_time_color_arr(c_arr: np.ndarray, max_iterations: int) -> np.ndar
 
 grid = get_complex_grid(-2+1.25j, 0.5-1.25j, 0.01)
 colors = get_escape_time_color_arr(grid, 30)
+
