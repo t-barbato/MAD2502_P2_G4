@@ -1,6 +1,6 @@
 import numpy as np
 
-def get_escape_time(c: complex, max_iterations: int) -> int | None:
+def get_escape_time(c: np.array(complex), max_iterations: int) -> int | None:
     z = c
     if abs(z) > 2:
         return 0
@@ -61,18 +61,29 @@ def get_complex_grid(top_left: complex, bottom_right: complex, step: float) -> n
 #     color_arr[escape_time_arr is None] = 0
 #     return color_arr
 
+# def get_escape_time_color_arr(c_arr: np.ndarray, max_iterations: int) -> np.ndarray:
+#     color_arr = (np.zeros_like(c_arr)).real
+#     inter = 0
+#     for i in range(len(c_arr)):
+#         for j in range(len(c_arr)):
+#             inter = get_escape_time(c_arr[i][j], max_iterations)
+#             if inter == 0:
+#                 color_arr[i][j] = 1
+#             elif inter == max_iterations:
+#                 color_arr[i][j] = 1/(max_iterations + 1)
+#             elif inter is None:
+#                 color_arr[i][j] = 0
+#             else:
+#                 color_arr[i][j] = (max_iterations-inter+1)/(max_iterations+1)
+#     return color_arr
+
 def get_escape_time_color_arr(c_arr: np.ndarray, max_iterations: int) -> np.ndarray:
-    color_arr = (np.zeros_like(c_arr)).real
-    inter = 0
+    color_arr = np.zeros_like(c_arr).real
     for i in range(len(c_arr)):
         for j in range(len(c_arr)):
-            inter = get_escape_time(c_arr[i][j], max_iterations)
-            if inter == 0:
-                color_arr[i][j] = 1
-            elif inter == max_iterations:
-                color_arr[i][j] = 1/(max_iterations + 1)
-            elif inter is None:
-                color_arr[i][j] = 0
-            else:
-                color_arr[i][j] = (max_iterations-inter+1)/(max_iterations+1)
+            color_arr[i][j] = get_escape_time(c_arr[i][j], max_iterations)
+    color_arr = (max_iterations-color_arr+1)/(max_iterations+1)
     return color_arr
+
+grid = get_complex_grid(-2+1.25j, 0.5-1.25j, 0.01)
+colors = get_escape_time_color_arr(grid, 30)
