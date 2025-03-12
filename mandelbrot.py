@@ -89,3 +89,12 @@ def get_escape_time_color_arr(c_arr: np.ndarray, max_iterations: int) -> np.ndar
 grid = get_complex_grid(-2+1.25j, 0.5-1.25j, 0.01)
 colors = get_escape_time_color_arr(grid, 30)
 
+# get_escape_time_color_arr with np.vectorize
+
+# def get_escape_time_color_arr(c_arr: np.ndarray, max_iterations: int) -> np.ndarray:
+#     vectorized_escape_times = np.vectorize(get_escape_time)
+#     color_arr = np.array(vectorized_escape_times(c_arr.real, max_iterations))
+#     color_arr = color_arr[np.] # something to filter out the None values
+#     color_arr = (max_iterations - color_arr + 1)/(max_iterations + 1)
+#     return color_arr
+
