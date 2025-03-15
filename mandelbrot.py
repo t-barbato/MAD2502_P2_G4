@@ -155,25 +155,25 @@ def get_julia_color_arr(c_arr: np.ndarray, c: complex, max_iterations: int) -> n
 #     color_arr = (max_iterations-color_arr+1)/(max_iterations+1)
 #     return color_arr
 
-def get_escape_time_julia(start: np.ndarray, c: complex, max_iterations: int) -> int:
-    """
-    Takes a complex number grid and gets the escape time for it. The escape time is the moment when the absolute value
-    of the magnitude is greater than 2.
-
-    Parameters:
-        start: complex number grid
-        c: complex number
-        max_iterations: int
-
-    Return:
-        int of number of iterations it takes to escape within range of max_iterations. If it does not escape,
-        returns max_iterations + 1:
-    """
-    z = start
-    if np.abs(z) > 2:
-        return 0
-    for i in range(max_iterations):
-        z = z ** 2 + c
-        if np.abs(z) > 2:
-            return i + 1
-    return None
+# def get_escape_time_julia(start: np.ndarray, c: complex, max_iterations: int) -> int:
+#     """
+#     Takes a complex number grid and gets the escape time for it. The escape time is the moment when the absolute value
+#     of the magnitude is greater than 2.
+#
+#     Parameters:
+#         start: complex number grid
+#         c: complex number
+#         max_iterations: int
+#
+#     Return:
+#         int of number of iterations it takes to escape within range of max_iterations. If it does not escape,
+#         returns max_iterations + 1:
+#     """
+#     z = start
+#     if np.abs(z) > 2:
+#         return 0
+#     for i in range(max_iterations):
+#         z = z ** 2 + c
+#         if np.abs(z) > 2:
+#             return i + 1
+#     return None
